@@ -224,9 +224,9 @@ int inst2_main(int argc, FAR char *argv[])
 
 			while(TONE==TONE_var && (gpio_read(low_tone_sw) || gpio_read(high_tone_sw))){
 
-				val_ir = read_adc(adc_pinnum);
+				val_ir = read_adc(pin_ir);
 
-				if(gpio_read(SW_high)) {
+				if(gpio_read(high_tone_sw)) {
 					  if(val_ir>550)
 						  TONE_var = E7;
 					  else if(val_ir>250)
@@ -238,13 +238,13 @@ int inst2_main(int argc, FAR char *argv[])
 					  else
 						  TONE_var = A6;
 				} else {
-					  if(ir_val>550)
+					  if(val_ir>550)
 						  TONE_var = C6;
-					  else if(ir_val>250)
+					  else if(val_ir>250)
 						  TONE_var = D6;
-					  else if(ir_val>140)
+					  else if(val_ir>140)
 						  TONE_var = E6;
-					  else if(ir_val>105)
+					  else if(val_ir>105)
 						  TONE_var = F6;
 					  else
 						  TONE_var = G6;
@@ -344,7 +344,7 @@ int game_main(int argc, FAR char *argv[])
    else if ( (argc==2) && (strcmp(argv[1],"instrument1")==0) ) {piano_main(argc,argv);}
    else if ( (argc==2) && (strcmp(argv[1],"ruler")==0) ) {ruler_main(argc,argv);}
    else if ( (argc==2) && (strcmp(argv[1],"instrument2")==0) ) {inst2_main(argc,argv);}
-   else if ( (argc==3) && (strcmp(argv[1],"instrument4")==0) ) {inst3_main(argc,argv);}
+   else if ( (argc==3) && (strcmp(argv[1],"instrument3")==0) ) {inst3_main(argc,argv);}
    else show_game_hexagon(argv[0]);
 
    return 0;
